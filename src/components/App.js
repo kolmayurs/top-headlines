@@ -41,8 +41,8 @@ class App extends Component {
         <div className="news_box">
           <div className="news_image"><img src={i.urlToImage} alt="" /></div>
           <div className="content-box">
-            <div className="content_title">{i.title}</div>
-            <div className="content_description">{i.description}</div>
+            <div className="content_title" title={i.title}>{i.title}</div>
+            <div className="content_description title={i.description}">{i.description}</div>
             <div className="content_author">{i.author}</div>
             <div className="content_publishtime">{t[2]+" "+months[month-1]+", "+year+" "+tm[0]}</div>
           </div>
