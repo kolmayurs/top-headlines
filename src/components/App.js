@@ -6,6 +6,7 @@ import { fetchData } from '../actions/fetchData'
 
 const mapStateToProps = (state) => {
     return {
+        loading: state.fetch.fetching,
         data: state.fetch.data
     }
 }
@@ -22,11 +23,35 @@ class App extends Component {
       this.state = {
         a: 25,
       }
+      this.refresh = this.refresh.bind(this);
     }
     componentDidMount() {
         this.props.fetchData();
+        setInterval(this.props.fetchData, 300000);
+    }
+    refresh(){
+      this.props.fetchData();
     }
     render() {
+      if(this.props.loading){
+        return(<div className="loader">
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>)
+      }
         const news = this.props.data.map((i, key) => {
           let t1 = i.publishedAt.split('T');
           let t = t1[0].split('-');
@@ -35,7 +60,6 @@ class App extends Component {
           let month = t[1];
           let day = t[2];
           let months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-          console.log(t);
             return (
         <a key={key} href={i.url} target="_blank" rel="noopener noreferrer" style={{textDecoration:'none',color:'#010101'}}>
         <div className="news_box">
@@ -44,7 +68,7 @@ class App extends Component {
             <div className="content_title" title={i.title}>{i.title}</div>
             <div className="content_description title={i.description}">{i.description}</div>
             <div className="content_author">{i.author}</div>
-            <div className="content_publishtime">{t[2]+" "+months[month-1]+", "+year+" "+tm[0]}</div>
+            <div className="content_publishtime">{day+" "+months[month-1]+", "+year+" "+tm[0]}</div>
           </div>
           <div className="clearleft"></div>
         </div>
@@ -54,6 +78,7 @@ class App extends Component {
         return (
       <div className="App">
         <div className="heading">Top Headline</div>
+        <div className="refresh_box"><span className="refresh" onClick={this.refresh.bind(this)}>Refresh</span> or will refresh after 5 mins.</div>
         <div>{news}</div>
         
       </div>
