@@ -6,7 +6,7 @@
 }
 
 .news_box{
-  width: calc(100%-200px);
+  width: 100%;
   background-color: #ffffff;
   padding: 20px;
   border-radius: 10px;
@@ -47,7 +47,7 @@ float: left;
    white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 800px;
+  width: 90%;
   display: block;
 text-align: left;
 }
